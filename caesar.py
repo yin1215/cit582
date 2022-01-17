@@ -24,7 +24,7 @@ def decrypt(key, ciphertext):
 
         if num >= 65 and num <= 90:
             num -= decre
-            if num < 90:
+            if num < 65:
                 num += 26
 
         plaintext += chr(num)
