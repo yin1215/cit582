@@ -32,5 +32,4 @@ def hash_collision(k):
     return (x, y)
 
 
-hash_collision(4)
 
