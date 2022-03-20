@@ -23,7 +23,7 @@ def send_tokens( receiver_pk, tx_amount ):
     last_valid_round = params.last
 
     #Your code here
-    mnemonic_str = 'Bwahaha tonight I dine on turtle soup'
+    mnemonic_str = 'Bwahaha tonight I dine on turtle soup bwahaha tonight I dine on turtle soup bwahaha tonight I dine on turtle soup bwahaha tonight I dine'
     sk = mnemonic.to_private_key(mnemonic_str)
     sender_pk = mnemonic.to_public_key(mnemonic_str)
 
