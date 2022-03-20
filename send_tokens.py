@@ -24,7 +24,7 @@ def send_tokens( receiver_pk, tx_amount ):
 
     #Your code here
 
-    sk = '-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVm'
+    sk = 'IKwp5GB8IuOSJhYFBgaiDvih3CerL/AigJJUupJVycI='
     mnemonic_str = mnemonic.from_private_key(sk)
     sender_pk = mnemonic.to_public_key(mnemonic_str)
 
