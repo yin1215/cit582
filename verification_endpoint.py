@@ -13,9 +13,11 @@ def verify():
     content = request.get_json(silent=True)
     sig = content['sig']
     payload = content['payload']
-    message = payload['message']
+    message = json.dumps(payload)
     pk = payload['pk']
     platform = payload['platform']
+
+    result = False
 
     if platform == 'Ethereum':
 
@@ -24,14 +26,10 @@ def verify():
 
         if eth_account.Account.recover_message(eth_encoded_msg, signature=sig_eth) == pk:
             result = True
-        else:
-            result = False
 
     else:
         if algosdk.util.verify_bytes(message.encode('utf-8'), sig, pk):
             result = True
-        else:
-            result = False
 
     #Check if signature is valid
     #Should only be true if signature validates
