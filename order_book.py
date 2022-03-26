@@ -37,6 +37,8 @@ def process_order(order):
             order_child['sell_amount'] = new_order.sell_amount - existing_order.buy_amount
             order_child['creator_id'] = new_order.id
             child_order = Order(**{f: order_child[f] for f in fields})
+            child_order.filled = timestamp
+            new_order.child = child_order
             session.add(child_order)
 
         elif new_order.sell_amount > existing_order.buy_amount:
@@ -49,6 +51,8 @@ def process_order(order):
             order_child['sell_amount'] = (existing_order.buy_amount - new_order.sell_amount) * existing_order.sell_amount / existing_order.buy_amount
             order_child['creator_id'] = existing_order.id
             child_order = Order(**{f: order_child[f] for f in fields})
+            child_order.filled = timestamp
+            existing_order.child = child_order
             session.add(child_order)
 
         break
