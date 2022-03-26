@@ -43,7 +43,7 @@ def process_order(order):
             session.add(child_order)
             session.commit()
 
-        elif new_order.sell_amount > existing_order.buy_amount:
+        elif new_order.sell_amount < existing_order.buy_amount:
             order_child = {}
             order_child['sender_pk'] = existing_order.sender_pk
             order_child['receiver_pk'] = existing_order.receiver_pk
