@@ -13,6 +13,8 @@ def process_order(order):
     #Your code here
     fields = ['sender_pk','receiver_pk','buy_currency','sell_currency','buy_amount','sell_amount']
     new_order = Order(**{f: order[f] for f in fields})
+    session.add(new_order)
+    session.commit()
 
     for existing_order in session.query(Order).filter(Order.creator == None).all():
         if existing_order.filled is not None:
@@ -28,6 +30,7 @@ def process_order(order):
         new_order.filled = timestamp
         existing_order.filled = timestamp
         new_order.counterparty_id, existing_order.counterparty_id = existing_order.id, new_order.id
+        session.commit()
 
         fields.append('creator_id')
 
@@ -38,6 +41,7 @@ def process_order(order):
             order_child['creator_id'] = new_order.id
             child_order = Order(**{f: order_child[f] for f in fields})
             session.add(child_order)
+            session.commit()
 
         elif new_order.sell_amount > existing_order.buy_amount:
             order_child = {}
@@ -50,9 +54,8 @@ def process_order(order):
             order_child['creator_id'] = existing_order.id
             child_order = Order(**{f: order_child[f] for f in fields})
             session.add(child_order)
+            session.commit()
 
         break
 
-    session.add(new_order)
-    session.commit()
     return
