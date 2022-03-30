@@ -40,7 +40,7 @@ def log_message(d):
     # Takes input dictionary d and writes it to the Log table
     #msg = json.dumps(d)
     fields = ['message']
-    msg = {'message': d}
+    msg = {'message': json.dumps(d)}
     #msg_obj = Log(message=msg)
     msg_obj = Log(**{f: msg[f] for f in fields})
     g.session.add(msg_obj)
@@ -50,8 +50,8 @@ def log_message(d):
 def verify(content):
     sig = content['sig']
     payload = content['payload']
-    message = payload['message']
-    pk = payload['pk']
+    message = json.dumps(payload)
+    pk = payload['sender_pk']
     platform = payload['platform']
 
     if platform == 'Ethereum':
