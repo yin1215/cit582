@@ -115,7 +115,8 @@ def trade():
             order['sell_currency'] = payload['sell_currency']
             order['buy_amount'] = payload['buy_amount']
             order['sell_amount'] = payload['sell_amount']
-            order_obj = Order(**{f: order[f] for f in fields})
+            #order_obj = Order(**{f: order[f] for f in fields})
+            order_obj = Order(sender_pk=order['sender_pk'], receiver_pk=order['receiver_pk'], buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], buy_amount=order['buy_amount'], sell_amount=order['sell_amount'], signature=order['signature'])
             g.session.add(order_obj)
             g.session.commit()
         else:
@@ -142,7 +143,7 @@ def order_book():
 
     result = {}
     result['data'] = data
-    return result
+    return jsonify(result)
 
 
 if __name__ == '__main__':
