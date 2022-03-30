@@ -38,8 +38,11 @@ def shutdown_session(response_or_exc):
 
 def log_message(d):
     # Takes input dictionary d and writes it to the Log table
-    msg = json.dumps(d)
-    msg_obj = Log(message=msg)
+    #msg = json.dumps(d)
+    fields = ['message']
+    msg = {'message': d}
+    #msg_obj = Log(message=msg)
+    msg_obj = Log(**{f: msg[f] for f in fields})
     g.session.add(msg_obj)
     g.session.commit()
 
