@@ -139,11 +139,11 @@ def order_book():
         content['sell_amount'] = order.sell_amount
         content['signature'] = order.signature
 
-        data.append(content)
+        data.append(jsonify(content))
 
     result = {}
     result['data'] = data
-    return jsonify(result)
+    return result
 
 
 if __name__ == '__main__':
