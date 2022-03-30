@@ -139,7 +139,7 @@ def order_book():
 
     result = {}
     result['data'] = data
-    return jsonify(result)
+    return result
 
 
 if __name__ == '__main__':
