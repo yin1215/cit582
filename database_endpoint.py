@@ -122,7 +122,7 @@ def trade():
         else:
             log_message(payload)
 
-        return jsonify(False)
+    return jsonify(False)
 
 
 
